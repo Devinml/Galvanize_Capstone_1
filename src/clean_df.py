@@ -83,16 +83,7 @@ def remove_resonable_trades(input_string):
     else:
         return False
 
-if __name__=='__main__':
-    # Read in CSV files into DF
-    
-    df1 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work.csv')
-    df2 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work_2.csv')
-
-    # clean DF1 
-    
-    clean_df1(df1).info()
-    # clean DF2
+def clean_df2(df2):
     df2['Wheel Size'] = df2["Wheel Size"].apply(clean_wheel_size_df2)
     df2['Front Travel']=df2['Front Travel'].apply(convert_string_flt)
     df2['Rear Travel']=df2['Rear Travel'].apply(convert_string_flt)
@@ -101,6 +92,29 @@ if __name__=='__main__':
     df2 = df2[df2['Price'].apply(lambda x : remove_resonable_trades(x))]
     df2['Price'] = df2['Price'].apply(convert_string_flt)
     df2['Price']=df2[['Price','Currance']].apply(lambda x: check_currancy(x['Price'],x['Currance']),axis=1)
+    return df2
 
+
+if __name__=='__main__':
+    # Read in CSV files into DF
+    
+    df1 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work.csv')
+    df2 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work_2.csv')
+    # clean DF1 
+    cleaned_df1 = clean_df1(df1)
+    # clean DF2
+    cleaned_df2 = clean_df2(df2)
+    cleaned_df2.rename(columns={'Frame Size':'Size',
+                        'Wheel Size':'Wheel_Size',
+                        'Front Travel':'Front_travel',
+                        'Rear Travel':'Rear_travel',
+                        'Currance':'Currency'},
+                        inplace=True)
+    cleaned_df1.rename(columns={'Currance':'Currency'},inplace=True)
     # join the two dataframes
+    df = pd.concat([cleaned_df1,cleaned_df2])
+   
+    
+    df.to_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data.csv')
+
 
