@@ -31,7 +31,7 @@ def rear_travel_clean(x):
         return False
     else:
         return True
-        
+
 def check_currancy(price,currancy,exch_rate=.74):
     if currancy == 'CAD':
         return price*exch_rate
@@ -53,12 +53,35 @@ def clean_df1(df1):
     #make price a float
     df1['Price'] = df1['Price'].apply(convert_string_flt)
     #complete curr. convert
-    df1[['Price','Currance']].apply(lambda x: check_currancy(x.Price,x.Currance),axis=1)
+    df1["Price"]=df1[['Price','Currance']].apply(lambda x: check_currancy(x.Price,x.Currance),axis=1)
     #return DF
     return df1
 
+def clean_wheel_size_df2(string):
+    if string == '29':
+        return 29.0
+    elif string == '275  650B':
+        return 27.5
+    else:
+        return string
 
+def return_curr(string):
+    if 'USD' in string:
+        return 'USD'
+    elif 'CAD' in string:
+        return 'CAD'
 
+def remove_other_wheels(obj):
+    if type(obj)== float:
+        return True
+    else:
+        return False
+
+def remove_resonable_trades(input_string):
+    if 'CAD' in input_string or 'USD' in input_string:
+        return True
+    else:
+        return False
 
 if __name__=='__main__':
     # Read in CSV files into DF
@@ -68,7 +91,16 @@ if __name__=='__main__':
 
     # clean DF1 
     
-    print(clean_df1(df1).head())
+    clean_df1(df1).info()
+    # clean DF2
+    df2['Wheel Size'] = df2["Wheel Size"].apply(clean_wheel_size_df2)
+    df2['Front Travel']=df2['Front Travel'].apply(convert_string_flt)
+    df2['Rear Travel']=df2['Rear Travel'].apply(convert_string_flt)
+    df2['Currance'] = df2['Price'].apply(return_curr)
+    df2 = df2[df2['Wheel Size'].apply(remove_other_wheels)]
+    df2 = df2[df2['Price'].apply(lambda x : remove_resonable_trades(x))]
+    df2['Price'] = df2['Price'].apply(convert_string_flt)
+    df2['Price']=df2[['Price','Currance']].apply(lambda x: check_currancy(x['Price'],x['Currance']),axis=1)
 
     # join the two dataframes
 
