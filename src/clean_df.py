@@ -31,6 +31,12 @@ def rear_travel_clean(x):
         return False
     else:
         return True
+        
+def check_currancy(price,currancy,exch_rate=.74):
+    if currancy == 'CAD':
+        return price*exch_rate
+    else:
+        return price
 
 def clean_df1(df1):
     #drop axis made from bad data
@@ -47,26 +53,22 @@ def clean_df1(df1):
     #make price a float
     df1['Price'] = df1['Price'].apply(convert_string_flt)
     #complete curr. convert
-    
+    df1[['Price','Currance']].apply(lambda x: check_currancy(x.Price,x.Currance),axis=1)
     #return DF
+    return df1
 
 
 
 
 if __name__=='__main__':
     # Read in CSV files into DF
-    df1 = pd.read_csv('../data/data_work.csv')
-    df2 = pd.read_csv('../data/data_work_2.csv')
-    # clean DF1 
-    df1.drop(axis = 1,labels = 'Unnamed: 9',inplace=True)
-    df1 = df1[df1['Material'].apply(lambda x : Check_Material(x))].copy()
-    df1['Wheel_Size'] = df1['Wheel_Size'].apply(lambda x : convert_wheel_string(x))
-    df1['Front_travel'] = df1['Front_travel'].apply(convert_string_flt)
-    df1 = df1[df1['Rear_travel'].apply(rear_travel_clean)]
-    df1['Rear_travel'] = df1['Rear_travel'].apply(convert_string_flt)
-    df1['Price'] = df1['Price'].apply(convert_string_flt)
-    #clean 2nd data frame
+    
+    df1 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work.csv')
+    df2 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work_2.csv')
 
+    # clean DF1 
+    
+    print(clean_df1(df1).head())
 
     # join the two dataframes
 
