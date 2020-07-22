@@ -113,7 +113,7 @@ if __name__=='__main__':
     cleaned_df1.rename(columns={'Currance':'Currency'},inplace=True)
     # join the two dataframes
     df = pd.concat([cleaned_df1,cleaned_df2])
-   
+    df = df[df['Price']<12000]
     df_29 = df[df['Wheel_Size']==29]
     df_275 = df[df['Wheel_Size']==27.5]
     df_29.to_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
