@@ -18,15 +18,18 @@ I web scraped PinkBike's classified tsection to get a data set. I extracted the 
     <li>Front Suspension Travel
     <li>Rear Suspension Travel
     <li>Asking Price
+    
 If the user didn't include all of the parameters teh data was not considered in the analysis. The total size of the dataset 
 3,919 cleaned posts. Of which 1689 were 29" wheel bikes and 2230 were 27.5". 
 
 <p align="center">
   <img src="Images/cleaned_data.png" >
 </p>
-And here are the first 10 postings of my listing. All fo the prices were converted into US. 
+And here are the first 10 postings of my listing. All prices were converted into the US dollar. 
 <p align="center">
   <img src="Images/df_head.png" >
 </p>
+
 ## EDA
+
 
