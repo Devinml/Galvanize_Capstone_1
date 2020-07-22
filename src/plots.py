@@ -4,34 +4,53 @@ import scipy.stats as stats
 import numpy as np
 plt.style.use('ggplot')
 
-df_29 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
-df_275 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv')
 
 def get_norm_coef(df):
     mean_df = df['Price'].mean()
     sqrt_df = np.sqrt(len(df['Price']))
-    std_df = df
+    std = (df['Price'].std())/sqrt_df
+    return mean_df,std
+
+def normal_dist(mean,std):
+    return stats.norm(loc=mean,scale=std)
 
 
-mean_29 = df_29['Price'].mean()
-mean_275 = df_275['Price'].mean()
+if __name__=='__main__':
+    df_29 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
+    df_275 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv')
+   
+    mean_29, std_29 = get_norm_coef(df_29)
+    mean_275, std_275 = get_norm_coef(df_275)
 
+    norm_29 = normal_dist(mean_29,std_29)
+    norm_275 = normal_dist(mean_275,std_275)
+    
+    x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
+    x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
 
-sqrt_n_29 = np.sqrt(len(df_29['Price']))
-sqrt_n_275 = np.sqrt(len(df_275['Price']))
+    fig, ax = plt.subplots(figsize=(12,5))
 
-std_29 = (df_29['Price'].std())/sqrt_n_29
-std_275 = df_275['Price'].std()/sqrt_n_275
+    ax.plot(x1,norm_275.pdf(x1),color='red',label='27.5')
+    ax.plot(x2,norm_29.pdf(x2),color= 'blue',label='29')
+    ax.set_title('Distribution of Bike Value Means Given Wheel Size')
+    ax.set_xlabel("Mean Price")
+    ax.set_ylabel("Probablility Density Function (Price)")
+    ax.set_ylim([-.0005,.018])
+    ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = 'blue',ls = '--',alpha=.5)
+    ax.axvline(mean_275,ymax=norm_275.pdf(mean_275)/(.018),color = 'red',ls = '--',alpha=.5)
+    
+    ax.set_xticks([2600,
+                    round(mean_275-2*std_275,5),
+                    round(mean_275,5),
+                    round(mean_275+2*std_275,5),
+                    round(mean_275+(mean_29-mean_275)/2,5),
+                    round(mean_29-2*std_29,5),
+                    round(mean_29,5),
+                    round(mean_29+2*std_29,5),3600])
+    plt.xticks(rotation=35)
+    ax.legend()
+    plt.tight_layout()
+    plt.show()
 
-x = np.linspace(2000,4000,2000)
-
-norm_29 = stats.norm(loc=mean_29,scale=std_29)
-norm_275 = stats.norm(loc=mean_275,scale=std_275)
-
-fig, ax = plt.subplots()
-
-ax.plot(x,norm_275.pdf(x),color='red')
-ax.plot(x,norm_29.pdf(x),color= 'blue')
-
-plt.show()
-
+    
+    
