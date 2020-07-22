@@ -52,11 +52,17 @@ if __name__=='__main__':
     ax.legend()
 
     fig1,ax1 = plt.subplots(figsize=(12,5))
-    sns.distplot(df_29['Price'],color='blue',bins=50,kde=True,ax=ax1,label='29')
     sns.distplot(df_275['Price'],color='red',bins=50,kde=True,ax=ax1,label='27.5')
+    sns.distplot(df_29['Price'],color='blue',bins=50,kde=True,ax=ax1,label='29')
+    
     ax1.legend()
 
-
+    fig2,ax2 = plt.subplots(figsize=(12,5))
+    # sns.kdeplot(x1,df_275['Price'],ax=ax2,label='27.5')
+    # sns.kdeplot(x2,df_29['Price'],ax=ax2,label='29')
+    sns.distplot(df_275['Price'],color='red',bins=50,kde=False,ax=ax2,label='27.5')
+    sns.distplot(df_29['Price'],color='blue',bins=50,kde=False,ax=ax2,label='29')
+    ax2.legend()
 
     plt.tight_layout()
     plt.show()
