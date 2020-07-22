@@ -54,15 +54,26 @@ if __name__=='__main__':
     fig1,ax1 = plt.subplots(figsize=(12,5))
     sns.distplot(df_275['Price'],color='red',bins=50,kde=True,ax=ax1,label='27.5')
     sns.distplot(df_29['Price'],color='blue',bins=50,kde=True,ax=ax1,label='29')
+    ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
+    ax1.legend()
     
     ax1.legend()
 
     fig2,ax2 = plt.subplots(figsize=(12,5))
+    bins_ = [i for i in range(0,10000,150)]
     # sns.kdeplot(x1,df_275['Price'],ax=ax2,label='27.5')
     # sns.kdeplot(x2,df_29['Price'],ax=ax2,label='29')
-    sns.distplot(df_275['Price'],color='red',bins=50,kde=False,ax=ax2,label='27.5')
-    sns.distplot(df_29['Price'],color='blue',bins=50,kde=False,ax=ax2,label='29')
+    sns.distplot(df_275['Price'],color='red',bins=bins_,kde=False,ax=ax2,label='27.5')
+    sns.distplot(df_29['Price'],color='blue',bins=bins_,kde=False,ax=ax2,label='29')
+    
+    # ax2.hist(df_275['Price'],bins=bins_, color = 'red',label='27.5',alpha=.5)
+    # ax2.hist(df_29['Price'],bins=bins_,color = 'blue',label='29',alpha=.5)
+    ax2.set_xticks(np.linspace(0,10000,25))
+    ax2.set_title('Histogram of 27.5" and 29" Wheel Bikes')
+    ax2.set_ylabel('Count')
+    ax2.set_xlabel('Price')
     ax2.legend()
+    plt.xticks(rotation=35)
 
     plt.tight_layout()
     plt.show()
