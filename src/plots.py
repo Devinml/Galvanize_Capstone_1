@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
+import seaborn as sns
 plt.style.use('ggplot')
 
 
@@ -49,6 +50,14 @@ if __name__=='__main__':
                     round(mean_29+2*std_29,5),3600])
     plt.xticks(rotation=35)
     ax.legend()
+
+    fig1,ax1 = plt.subplots(figsize=(12,5))
+    sns.distplot(df_29['Price'],color='blue',bins=50,kde=True,ax=ax1,label='29')
+    sns.distplot(df_275['Price'],color='red',bins=50,kde=True,ax=ax1,label='27.5')
+    ax1.legend()
+
+
+
     plt.tight_layout()
     plt.show()
 
