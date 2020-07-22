@@ -43,3 +43,4 @@ I started by making a histogram for each wheel size. Based off the histogram it 
   <img src="Images/hist_no_kde.png" >
 </p>
 
+Based off the central theorm. 

@@ -4,6 +4,7 @@ import scipy.stats as stats
 import numpy as np
 import seaborn as sns
 plt.style.use('ggplot')
+plt.rcParams.update({'font.size': 16})
 
 
 def get_norm_coef(df):
