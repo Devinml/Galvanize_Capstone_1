@@ -49,5 +49,5 @@ I applied the Central Limit Theroem and generated this plot
 </p>
 
 <p align="center">
-  <img src="Images/boxplot_material.png" >
+  <img src="Images/boxplot_material.png" width=600 height=750  >
 </p>

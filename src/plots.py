@@ -102,7 +102,7 @@ if __name__=='__main__':
 
     # Box Plot of materials
     fig4,ax4 = plt.subplots(figsize=(8,10))
-    sns.boxplot(x='Material',y='Price',data=df,order=['Steel','Chromoly','Aluminum','Carbon Fiber','Titanium'],color=None)
+    sns.boxplot(x='Material',y='Price',data=df,color='grey',order=['Steel','Chromoly','Aluminum','Carbon Fiber','Titanium'])
     ax4.set_title('Distributions of Frame Material')
     plt.xticks(rotation=35)
 
