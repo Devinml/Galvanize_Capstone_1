@@ -1,11 +1,6 @@
 # Galvanize_Capstone_1
 ## Background
-Wheather you are a passionate mountainbike racer or have just started, you know that mountain bikes are expensive. A new mountain bike that has high enough quality components to race is going to range from $4500-8000. This being said, you might think to buy a second hand bike. In the world of mountain bikes there are two wheeel sizes, 27.5"  and 29". The difference between these two is a trade-off between speed and manouverability. A 29" bike will be faster do to its ability to roll over obsticles due to a smaller angel of attack.
-<p align="center">
-  <img src="Images/angle_of_attack _final.png" width=800 height=500 >
-</p>
-
- A 27.5" bike is going to be what is called "flickable" it can change direction easily at the cost of speed. I want to know wheater a 29" wheel bike is worth morth than a 27.5" in the used bike market. 
+Wheather you are a passionate mountainbike racer or have just started, you know that mountain bikes are expensive. A new mountain bike that has high enough quality components to race is going to range from $4500-8000. This being said, you might think to buy a second hand bike. In the world of mountain bikes there are two wheeel sizes, 27.5"  and 29". The difference between these two is a trade-off between speed and manouverability. A 29" bike will be faster do to its ability to roll over obsticles due to a smaller angel of attack. A 27.5" bike is going to be what is called "flickable" it can change direction easily at the cost of speed. I want to know wheater a 29" wheel bike is worth morth than a 27.5" in the used bike market. 
 ## The Data
 To answer this question I went to PinkBike.com's classifieds section where owners of mountain bikes can post their bike for sale to the mountain bike community. 
 
@@ -47,4 +42,12 @@ I applied the Central Limit Theroem and generated this plot
 
 <p align="center">
   <img src="Images/Dist_of_means.png" >
+</p>
+
+<p align="center">
+  <img src="Images/box_plot.png" >
+</p>
+
+<p align="center">
+  <img src="Images/boxplot_material.png" >
 </p>

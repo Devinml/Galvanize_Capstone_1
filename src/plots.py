@@ -5,6 +5,12 @@ import numpy as np
 import seaborn as sns
 plt.style.use('ggplot')
 plt.rcParams.update({'font.size': 16})
+import scipy.stats as stats
+# from matplotlib.colors import ListedColormap
+
+# # construct cmap
+# flatui = ["#9b59b6", "#3498db", "#95a5a6", "#e74c3c", "#34495e", "#2ecc71"]
+# my_cmap = ListedColormap(sns.color_palette(flatui).as_hex())
 
 
 def get_norm_coef(df):
@@ -38,6 +44,7 @@ if __name__=='__main__':
     x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
     x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
 
+    t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
     fig, ax = plt.subplots(figsize=(12,8))
 
     ax.plot(x1,norm_275.pdf(x1),color='red',label='27.5')
@@ -48,7 +55,7 @@ if __name__=='__main__':
     ax.set_ylim([-.0005,.018])
     ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = 'blue',ls = '--',alpha=.5)
     ax.axvline(mean_275,ymax=norm_275.pdf(mean_275)/(.018),color = 'red',ls = '--',alpha=.5)
-    
+    plt.text(3225,0.0143594,s=f'T_stat = {t_test[0]:.2f}, p value = {t_test[1]:.2f}')
     ax.set_xticks([2600,
                     round(mean_275-2*std_275,5),
                     round(mean_275,5),
@@ -61,8 +68,8 @@ if __name__=='__main__':
     ax.legend()
 
     fig1,ax1 = plt.subplots(figsize=(12,5))
-    sns.distplot(df_275['Price'],color='red',bins=50,kde=True,ax=ax1,label='27.5')
-    sns.distplot(df_29['Price'],color='blue',bins=50,kde=True,ax=ax1,label='29')
+    sns.distplot(df_275['Price'],color='blue',bins=50,kde=True,ax=ax1,label='27.5')
+    sns.distplot(df_29['Price'],color='red',bins=50,kde=True,ax=ax1,label='29')
     ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax1.legend()
     
@@ -70,13 +77,11 @@ if __name__=='__main__':
 
     fig2,ax2 = plt.subplots(figsize=(12,5))
     bins_ = [i for i in range(0,10000,150)]
-    # sns.kdeplot(x1,df_275['Price'],ax=ax2,label='27.5')
-    # sns.kdeplot(x2,df_29['Price'],ax=ax2,label='29')
+   
     sns.distplot(df_275['Price'],color='red',bins=bins_,kde=False,ax=ax2,label='27.5')
     sns.distplot(df_29['Price'],color='blue',bins=bins_,kde=False,ax=ax2,label='29')
     
-    # ax2.hist(df_275['Price'],bins=bins_, color = 'red',label='27.5',alpha=.5)
-    # ax2.hist(df_29['Price'],bins=bins_,color = 'blue',label='29',alpha=.5)
+
     ax2.set_xticks(np.linspace(0,10000,25))
     ax2.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax2.set_ylabel('Count')
@@ -89,6 +94,8 @@ if __name__=='__main__':
     ax3.set_xlabel('Front Travel')
 
 
+    fig4,ax4 = plt.subplots(figsize=(7,9))
+    sns.boxplot(x='Material',y='Price',data=df)
     plt.tight_layout()
     plt.show()
 
