@@ -47,14 +47,16 @@ if __name__=='__main__':
     t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
     fig, ax = plt.subplots(figsize=(12,8))
 
-    ax.plot(x1,norm_275.pdf(x1),color='red',label='27.5')
-    ax.plot(x2,norm_29.pdf(x2),color= 'blue',label='29')
+    ax.plot(x1,norm_275.pdf(x1),color='#C95948',label='27.5')
+    ax.plot(x2,norm_29.pdf(x2),color= '#4586AC',label='29')
+    # sns.lineplot(x=x1,y=norm_275.pdf(x1),color='tab:red',ax=ax,label='27.5')
+    # sns.lineplot(x=x2,y=norm_29.pdf(x2),color='tab:blue',ax=ax,label='29')
     ax.set_title('Distribution of Bike Value Means Given Wheel Size')
     ax.set_xlabel("Mean Price")
     ax.set_ylabel("Probablility Density Function (Price)")
     ax.set_ylim([-.0005,.018])
-    ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = 'blue',ls = '--',alpha=.5)
-    ax.axvline(mean_275,ymax=norm_275.pdf(mean_275)/(.018),color = 'red',ls = '--',alpha=.5)
+    ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = '#4586AC',ls = '--',alpha=.5)
+    ax.axvline(mean_275,ymax=norm_275.pdf(mean_275)/(.018),color = '#C95948',ls = '--',alpha=.5)
     plt.text(3225,0.0143594,s=f'T_stat = {t_test[0]:.2f}, p value = {t_test[1]:.2f}')
     ax.set_xticks([2600,
                     round(mean_275-2*std_275,5),
@@ -68,8 +70,8 @@ if __name__=='__main__':
     ax.legend()
 
     fig1,ax1 = plt.subplots(figsize=(12,5))
-    sns.distplot(df_275['Price'],color='blue',bins=50,kde=True,ax=ax1,label='27.5')
-    sns.distplot(df_29['Price'],color='red',bins=50,kde=True,ax=ax1,label='29')
+    sns.distplot(df_275['Price'],color='#4586AC',bins=50,kde=True,ax=ax1,label='27.5')
+    sns.distplot(df_29['Price'],color='#C95948',bins=50,kde=True,ax=ax1,label='29')
     ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax1.legend()
     
@@ -78,8 +80,8 @@ if __name__=='__main__':
     fig2,ax2 = plt.subplots(figsize=(12,5))
     bins_ = [i for i in range(0,10000,150)]
    
-    sns.distplot(df_275['Price'],color='red',bins=bins_,kde=False,ax=ax2,label='27.5')
-    sns.distplot(df_29['Price'],color='blue',bins=bins_,kde=False,ax=ax2,label='29')
+    sns.distplot(df_275['Price'],color='#C95948',bins=bins_,kde=False,ax=ax2,label='27.5')
+    sns.distplot(df_29['Price'],color='#4586AC',bins=bins_,kde=False,ax=ax2,label='29')
     
 
     ax2.set_xticks(np.linspace(0,10000,25))
