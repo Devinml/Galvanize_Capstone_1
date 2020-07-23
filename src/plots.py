@@ -44,8 +44,8 @@ if __name__=='__main__':
     mean_275, std_275 = get_norm_coef(df_275)
     norm_29 = normal_dist(mean_29,std_29)
     norm_275 = normal_dist(mean_275,std_275)
-    x1 = np.linspace(mean_275-20*std_275,mean_275+20*std_275,500)
-    x2 = np.linspace(mean_29-20*std_29,mean_29+20*std_29,500)
+    x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
+    x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
     t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
 
 
@@ -102,7 +102,7 @@ if __name__=='__main__':
 
     # Box Plot of materials
     fig4,ax4 = plt.subplots(figsize=(8,10))
-    sns.boxplot(x='Material',y='Price',data=df,order=['Steel','Chromoly','Aluminum','Carbon Fiber','Titanium'])
+    sns.boxplot(x='Material',y='Price',data=df,order=['Steel','Chromoly','Aluminum','Carbon Fiber','Titanium'],color=None)
     ax4.set_title('Distributions of Frame Material')
     plt.xticks(rotation=35)
 
