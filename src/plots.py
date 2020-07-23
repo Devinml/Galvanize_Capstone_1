@@ -45,14 +45,15 @@ if __name__=='__main__':
     norm_29 = normal_dist(mean_29,std_29)
     norm_275 = normal_dist(mean_275,std_275)
     x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
-    x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
+    x2 = np.linspace(mean_29-6*std_29,mean_29*std_29,500)
     t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
 
 
     # Distribution of means plots
     fig, ax = plt.subplots(figsize=(12,8))
-    ax.plot(x1,norm_275.pdf(x1),color='#C95948',label='27.5')
-    ax.plot(x2,norm_29.pdf(x2),color= '#4586AC',label='29')
+    x = np.linspace(2600,3600,2000)
+    ax.plot(x,norm_275.pdf(x),color='#C95948',label='27.5')
+    ax.plot(x,norm_29.pdf(x),color= '#4586AC',label='29')
     ax.set_title('Distribution of Bike Value Means Given Wheel Size')
     ax.set_xlabel("Mean Price")
     ax.set_ylabel("Probablility Density Function (Price)")
