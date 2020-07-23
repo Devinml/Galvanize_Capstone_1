@@ -118,5 +118,6 @@ if __name__=='__main__':
     df_275 = df[df['Wheel_Size']==27.5]
     df_29.to_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
     df_275.to_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv')
+    df.to_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data.csv')
 
 

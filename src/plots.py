@@ -16,10 +16,18 @@ def get_norm_coef(df):
 def normal_dist(mean,std):
     return stats.norm(loc=mean,scale=std)
 
+def box_plot_df(df):
+    greater_90 = df['Front_travel']>90
+    less_than200 = df['Front_travel']<=200
+    price_gr_0 = df['Price']>100
+    not_75 = df['Front_travel']!=175
+    return df[(greater_90)&(less_than200)&(price_gr_0)&(not_75)]
+
 
 if __name__=='__main__':
     df_29 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
     df_275 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv')
+    df = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data.csv')
    
     mean_29, std_29 = get_norm_coef(df_29)
     mean_275, std_275 = get_norm_coef(df_275)
@@ -30,7 +38,7 @@ if __name__=='__main__':
     x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
     x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
 
-    fig, ax = plt.subplots(figsize=(12,5))
+    fig, ax = plt.subplots(figsize=(12,8))
 
     ax.plot(x1,norm_275.pdf(x1),color='red',label='27.5')
     ax.plot(x2,norm_29.pdf(x2),color= 'blue',label='29')
@@ -58,7 +66,7 @@ if __name__=='__main__':
     ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax1.legend()
     
-    ax1.legend()
+   
 
     fig2,ax2 = plt.subplots(figsize=(12,5))
     bins_ = [i for i in range(0,10000,150)]
@@ -75,6 +83,11 @@ if __name__=='__main__':
     ax2.set_xlabel('Price')
     ax2.legend()
     plt.xticks(rotation=35)
+    
+    fig3,ax3 = plt.subplots(figsize=(12,5))
+    sns.boxplot(x='Front_travel',y='Price',data = box_plot_df(df),hue="Wheel_Size",ax=ax3)
+    ax3.set_xlabel('Front Travel')
+
 
     plt.tight_layout()
     plt.show()
