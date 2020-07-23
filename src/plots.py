@@ -6,11 +6,6 @@ import seaborn as sns
 plt.style.use('ggplot')
 plt.rcParams.update({'font.size': 16})
 import scipy.stats as stats
-# from matplotlib.colors import ListedColormap
-
-# # construct cmap
-# flatui = ["#9b59b6", "#3498db", "#95a5a6", "#e74c3c", "#34495e", "#2ecc71"]
-# my_cmap = ListedColormap(sns.color_palette(flatui).as_hex())
 
 
 def get_norm_coef(df):
@@ -29,28 +24,35 @@ def box_plot_df(df):
     not_75 = df['Front_travel']!=175
     return df[(greater_90)&(less_than200)&(price_gr_0)&(not_75)]
 
+def fix_aluminum_spelling(string):
+    if string =='Aluminium':
+        return "Aluminum"
+    else:
+        return string
+
 
 if __name__=='__main__':
+    # Import Data
     df_29 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv')
     df_275 = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv')
     df = pd.read_csv('/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data.csv')
-   
+    df['Material'] = df['Material'].apply(fix_aluminum_spelling)
+    df_29['Material'] = df_29['Material'].apply(fix_aluminum_spelling)
+    df_275['Material'] = df_275['Material'].apply(fix_aluminum_spelling)
+   # Calculate Values for T_test and Normal Distribution
     mean_29, std_29 = get_norm_coef(df_29)
     mean_275, std_275 = get_norm_coef(df_275)
-
     norm_29 = normal_dist(mean_29,std_29)
     norm_275 = normal_dist(mean_275,std_275)
-    
-    x1 = np.linspace(mean_275-6*std_275,mean_275+6*std_275,500)
-    x2 = np.linspace(mean_29-6*std_29,mean_29+6*std_29,500)
-
+    x1 = np.linspace(mean_275-20*std_275,mean_275+20*std_275,500)
+    x2 = np.linspace(mean_29-20*std_29,mean_29+20*std_29,500)
     t_test = stats.ttest_ind(df_29['Price'],df_275['Price'],equal_var=False)
-    fig, ax = plt.subplots(figsize=(12,8))
 
+
+    # Distribution of means plots
+    fig, ax = plt.subplots(figsize=(12,8))
     ax.plot(x1,norm_275.pdf(x1),color='#C95948',label='27.5')
     ax.plot(x2,norm_29.pdf(x2),color= '#4586AC',label='29')
-    # sns.lineplot(x=x1,y=norm_275.pdf(x1),color='tab:red',ax=ax,label='27.5')
-    # sns.lineplot(x=x2,y=norm_29.pdf(x2),color='tab:blue',ax=ax,label='29')
     ax.set_title('Distribution of Bike Value Means Given Wheel Size')
     ax.set_xlabel("Mean Price")
     ax.set_ylabel("Probablility Density Function (Price)")
@@ -69,35 +71,41 @@ if __name__=='__main__':
     plt.xticks(rotation=35)
     ax.legend()
 
+
+    # Histogram with KDE
+
     fig1,ax1 = plt.subplots(figsize=(12,5))
-    sns.distplot(df_275['Price'],color='#4586AC',bins=50,kde=True,ax=ax1,label='27.5')
-    sns.distplot(df_29['Price'],color='#C95948',bins=50,kde=True,ax=ax1,label='29')
+    sns.distplot(df_275['Price'],color='#C95948',bins=50,kde=True,ax=ax1,label='27.5')
+    sns.distplot(df_29['Price'],color='#4586AC',bins=50,kde=True,ax=ax1,label='29')
     ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax1.legend()
     
-   
 
+    # Histogram without KDE
     fig2,ax2 = plt.subplots(figsize=(12,5))
     bins_ = [i for i in range(0,10000,150)]
-   
     sns.distplot(df_275['Price'],color='#C95948',bins=bins_,kde=False,ax=ax2,label='27.5')
     sns.distplot(df_29['Price'],color='#4586AC',bins=bins_,kde=False,ax=ax2,label='29')
-    
-
     ax2.set_xticks(np.linspace(0,10000,25))
     ax2.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax2.set_ylabel('Count')
     ax2.set_xlabel('Price')
     ax2.legend()
     plt.xticks(rotation=35)
-    
+
+
+    # Box plot of materials Given Wheel Size
     fig3,ax3 = plt.subplots(figsize=(12,5))
     sns.boxplot(x='Front_travel',y='Price',data = box_plot_df(df),hue="Wheel_Size",ax=ax3)
     ax3.set_xlabel('Front Travel')
+    ax3.set_title('Distributions of Price With Varying Suspension Travel')
 
+    # Box Plot of materials
+    fig4,ax4 = plt.subplots(figsize=(8,10))
+    sns.boxplot(x='Material',y='Price',data=df,order=['Steel','Chromoly','Aluminum','Carbon Fiber','Titanium'])
+    ax4.set_title('Distributions of Frame Material')
+    plt.xticks(rotation=35)
 
-    fig4,ax4 = plt.subplots(figsize=(7,9))
-    sns.boxplot(x='Material',y='Price',data=df)
     plt.tight_layout()
     plt.show()
 
