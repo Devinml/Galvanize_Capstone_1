@@ -113,13 +113,13 @@ if __name__ == '__main__':
     dir_Galv = '/home/devin/Documents/Galvanize/'
     dir_repo = 'repos/Galvanize_Capstone_1/'
     fire_prof = 'data/firefoxprofile'
-    profile = webdriver.FirefoxProfile(
-        '''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/firefoxprofile''')
+    profile = webdriver.FirefoxProfile(dir_Galv + dir_repo + fire_prof)
     driver = webdriver.Firefox(firefox_profile=profile)
     # Write the Columns of the CSV file
     f = open('data3.csv', 'w')
-    headers = '''Title,Condition,Size,Wheel_Size,Material,Front_travel,Rear_travel,Price,Currance'''
-    f.write(headers.replace("'/'", ''))
+    headers_1 = 'Title,Condition,Size,Wheel_Size,'
+    headers_2 = 'Material,Front_travel,Rear_travel,Price,Currance'
+    f.write(headers_1 + headers_2)
     f.write('\n')
     # The Scraping function could be cleaner but I don't have the time
     scraping_func()
