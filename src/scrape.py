@@ -115,8 +115,8 @@ if __name__ == '__main__':
     driver = webdriver.Firefox(firefox_profile=profile)
     # Write the Columns of the CSV file
     f = open('data3.csv', 'w')
-    f.write(
-        '''Title,Condition,Size,Wheel_Size,Material,Front_travel,Rear_travel,Price,Currance''')
+    headers = '''Title,Condition,Size,Wheel_Size,Material,Front_travel,Rear_travel,Price,Currance'''
+    f.write(headers.replace("'/'", ''))
     f.write('\n')
     # The Scraping function could be cleaner but I don't have the time
     scraping_func()
