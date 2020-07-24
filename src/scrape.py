@@ -110,6 +110,9 @@ def scraping_func():
 if __name__ == '__main__':
     # The following loads the personal data
     # that helps make the scaping proccess faster
+    dir_Galv = '/home/devin/Documents/Galvanize/'
+    dir_repo = 'repos/Galvanize_Capstone_1/'
+    fire_prof = 'data/firefoxprofile'
     profile = webdriver.FirefoxProfile(
         '''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/firefoxprofile''')
     driver = webdriver.Firefox(firefox_profile=profile)

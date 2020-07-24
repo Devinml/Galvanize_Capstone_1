@@ -121,11 +121,8 @@ def clean_df2(df2):
 if __name__ == '__main__':
     # Read in CSV files into DF
 
-    df1 = pd.read_csv('''/home/devin/Documents/Galvanize/
-                      repos/Galvanize_Capstone_1/data/data_work.csv''')
-    df2 = pd.read_csv('''/home/devin/Documents/
-                      Galvanize/repos/Galvanize_Capstone_1/
-                      data/data_work_2.csv''')
+    df1 = pd.read_csv('''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work.csv''')
+    df2 = pd.read_csv('''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/data_work_2.csv''')
     # clean DF1
     cleaned_df1 = clean_df1(df1)
     # clean DF2
@@ -144,12 +141,6 @@ if __name__ == '__main__':
     df_29 = df[df['Wheel_Size'] == 29]
     df_275 = df[df['Wheel_Size'] == 27.5]
     # Write cleaned data to file
-    df_29.to_csv('''/home/devin/Documents/Galvanize/
-                 repos/Galvanize_Capstone_1/data/
-                 cleaned_data_29.csv''')
-    df_275.to_csv('''/home/devin/Documents/Galvanize/
-                  repos/Galvanize_Capstone_1/
-                  data/cleaned_data_275.csv''')
-    df.to_csv('''/home/devin/Documents/Galvanize/
-              repos/Galvanize_Capstone_1/
-              data/cleaned_data.csv''')
+    df_29.to_csv('''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_29.csv''')
+    df_275.to_csv('''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data_275.csv''')
+    df.to_csv('''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/cleaned_data.csv''')
