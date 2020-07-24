@@ -68,4 +68,4 @@ An interesting further investigation is that titanium bikes had a higher central
 </p>
 
 ## Conclusion
-If you are in the used market for a high-end mountain bike you should expect to pay more for a 29er. A glass half full approach to that is: if you are in the market for a used mountain bike and you can live without the breakneck speeds of a 29er you could save yourself some money and still have a decent bike with a 27.5. 
+If you are in the used market for a high-end mountain bike you should expect to pay more for a 29er. A glass half full approach to that is: if you are in the market for a used mountain bike, and you can live without the breakneck speeds of a 29er, you could save yourself some money and still have a decent bike with a 27.5. 
