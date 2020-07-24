@@ -73,7 +73,9 @@ class WebCleaner(object):
 def scraping_func():
     # Loop through each page on the website
     for x in range(1, 2):
-        url = f'''https://www.pinkbike.com/buysell/list/?region=3&page={x}&category=2'''
+        first_url = 'https://www.pinkbike.com/buysell/list/'
+        second_part_url = f'?region=3&page={x}&category=2'
+        url = first_url + second_part_url
         driver.get(url)
         # On Each page there are 20 postings to scrape data from.
         for i in range(1):

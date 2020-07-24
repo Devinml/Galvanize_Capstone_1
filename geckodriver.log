@@ -40,3 +40,10 @@ JavaScript warning: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adb
 JavaScript error: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adblockplus.js, line 0: Error: frame.state is undefined
 1595603428968	Marionette	INFO	Stopped listening on port 46543
 JavaScript error: resource://gre/modules/ConduitsChild.jsm, line 108: Error: sendRemoveListener on closed conduit jid1-NIfFY2CA8fy1tg@jetpack.274877906949
+1595603591491	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilej3443h"
+1595603593846	Marionette	INFO	Listening on port 45797
+1595603593898	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adblockplus.js, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adblockplus.js, line 0: Error: frame.state is undefined
+1595603599782	Marionette	INFO	Stopped listening on port 45797
+JavaScript error: resource://gre/modules/ConduitsChild.jsm, line 108: Error: sendRemoveListener on closed conduit jid1-NIfFY2CA8fy1tg@jetpack.274877906947
