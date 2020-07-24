@@ -73,8 +73,7 @@ class WebCleaner(object):
 def scraping_func():
     # Loop through each page on the website
     for x in range(1, 2):
-        url = f'''https://www.pinkbike.com/buysell/
-                list/?region=3&page={x}&category=2'''
+        url = f'''https://www.pinkbike.com/buysell/list/?region=3&page={x}&category=2'''
         driver.get(url)
         # On Each page there are 20 postings to scrape data from.
         for i in range(1):
@@ -112,13 +111,12 @@ if __name__ == '__main__':
     # The following loads the personal data
     # that helps make the scaping proccess faster
     profile = webdriver.FirefoxProfile(
-        '''/home/devin/Documents/Galvanize
-        /repos/Galvanize_Capstone_1/data/firefoxprofile''')
+        '''/home/devin/Documents/Galvanize/repos/Galvanize_Capstone_1/data/firefoxprofile''')
     driver = webdriver.Firefox(firefox_profile=profile)
     # Write the Columns of the CSV file
     f = open('data3.csv', 'w')
-    f.write('''Title,Condition,Size,Wheel_Size,Material,
-            Front_travel,Rear_travel,Price,Currance''')
+    f.write(
+        '''Title,Condition,Size,Wheel_Size,Material,Front_travel,Rear_travel,Price,Currance''')
     f.write('\n')
     # The Scraping function could be cleaner but I don't have the time
     scraping_func()

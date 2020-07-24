@@ -1,0 +1,7 @@
+1595602154540	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileoao7P7"
+JavaScript warning: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adblockplus.js, line 0: Successfully compiled asm.js code (total compilation time 2ms)
+1595602157058	Marionette	INFO	Listening on port 38985
+1595602157164	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: moz-extension://cb3e19fa-a6bf-4b9d-aa1b-77fd81217198/lib/adblockplus.js, line 0: Error: frame.state is undefined
+1595602162484	Marionette	INFO	Stopped listening on port 38985
+JavaScript error: resource://gre/modules/ConduitsChild.jsm, line 108: Error: sendRemoveListener on closed conduit jid1-NIfFY2CA8fy1tg@jetpack.274877906947
