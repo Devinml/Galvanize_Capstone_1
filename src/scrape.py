@@ -120,5 +120,6 @@ if __name__ == '__main__':
     f.write('''Title,Condition,Size,Wheel_Size,Material,
             Front_travel,Rear_travel,Price,Currance''')
     f.write('\n')
+    # The Scraping function could be cleaner but I don't have the time
     scraping_func()
     print('connection is closed')

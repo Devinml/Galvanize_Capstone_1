@@ -40,6 +40,7 @@ def rear_travel_clean(x):
 
 
 def check_currancy(price, currancy, exch_rate=.74):
+    # Convert Currencty from CAD to US
     if currancy == 'CAD':
         return price * exch_rate
     else:
@@ -66,6 +67,7 @@ def clean_df1(df1):
 
 
 def clean_wheel_size_df2(string):
+    # Convert string to float of wheel size
     if string == '29':
         return 29.0
     elif string == '275  650B':
@@ -75,6 +77,7 @@ def clean_wheel_size_df2(string):
 
 
 def return_curr(string):
+    # Return the Correct Currency
     if 'USD' in string:
         return 'USD'
     elif 'CAD' in string:
@@ -82,6 +85,8 @@ def return_curr(string):
 
 
 def remove_other_wheels(obj):
+    # Remove other wheels that might be in data
+    # That weren't filtered
     if type(obj) == float:
         return True
     else:
@@ -89,6 +94,7 @@ def remove_other_wheels(obj):
 
 
 def remove_resonable_trades(input_string):
+    # Remove the string Resonable trades accepted
     if 'CAD' in input_string or 'USD' in input_string:
         return True
     else:
@@ -96,6 +102,8 @@ def remove_resonable_trades(input_string):
 
 
 def clean_df2(df2):
+    # apply the above functions to df2
+    # df2 was data previously scrapped and has sperate issues
     df2['Wheel Size'] = df2["Wheel Size"].apply(clean_wheel_size_df2)
     df2['Front Travel'] = df2['Front Travel'].apply(convert_string_flt)
     df2['Rear Travel'] = df2['Rear Travel'].apply(convert_string_flt)
@@ -132,8 +140,10 @@ if __name__ == '__main__':
     # join the two dataframes
     df = pd.concat([cleaned_df1, cleaned_df2])
     df = df[df['Price'] < 12000]
+    # Kept seperated for ease of plotting
     df_29 = df[df['Wheel_Size'] == 29]
     df_275 = df[df['Wheel_Size'] == 27.5]
+    # Write cleaned data to file
     df_29.to_csv('''/home/devin/Documents/Galvanize/
                  repos/Galvanize_Capstone_1/data/
                  cleaned_data_29.csv''')

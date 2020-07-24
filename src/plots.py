@@ -63,7 +63,7 @@ if __name__ == '__main__':
     x2 = np.linspace(mean_29-6*std_29, mean_29*std_29, 500)
     t_test = stats.ttest_ind(df_29['Price'], df_275['Price'], equal_var=False)
 
-    # Distribution of means plots
+    # Distribution of means plot
     fig, ax = plt.subplots(figsize=(12, 8))
     x = np.linspace(2600, 3600, 2000)
     ax.plot(x, norm_275.pdf(x), color='#C95948', label='27.5')
