@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def Check_Material(string):
+def check_material(string):
     # Cleans the df by filtering material
     if string == 'Aluminium' or string == 'Carbon Fiber':
         return True
@@ -51,7 +51,7 @@ def clean_df1(df1):
     # Convert Front suspension to float. Convert Rear travel to float and clean
     # Convert Price to float and convert to US $
     df1.drop(axis=1, labels='Unnamed: 9', inplace=True)
-    df1 = df1[df1['Material'].apply(lambda x: Check_Material(x))].copy()
+    df1 = df1[df1['Material'].apply(lambda x: check_material(x))].copy()
     df1['Wheel_Size'] = df1['Wheel_Size'].apply(lambda x:
                                                 convert_wheel_string(x))
     df1['Front_travel'] = df1['Front_travel'].apply(convert_string_flt)
