@@ -55,7 +55,7 @@ if __name__=='__main__':
     ax.plot(x,norm_275.pdf(x),color='#C95948',label='27.5')
     ax.plot(x,norm_29.pdf(x),color= '#4586AC',label='29')
     ax.set_title('Distribution of Bike Value Means Given Wheel Size')
-    ax.set_xlabel("Mean Price")
+    ax.set_xlabel("Mean Price($)")
     ax.set_ylabel("Probablility Density Function (Price)")
     ax.set_ylim([-.0005,.018])
     ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = '#4586AC',ls = '--',alpha=.5)
@@ -75,30 +75,32 @@ if __name__=='__main__':
 
     # Histogram with KDE
 
-    fig1,ax1 = plt.subplots(figsize=(12,5))
+
+    fig1,ax1 = plt.subplots(figsize=(12,5.5))
     sns.distplot(df_275['Price'],color='#C95948',bins=50,kde=True,ax=ax1,label='27.5')
     sns.distplot(df_29['Price'],color='#4586AC',bins=50,kde=True,ax=ax1,label='29')
     ax1.set_title('Histogram of 27.5" and 29" Wheel Bikes')
+    ax1.set_xlabel('Price($)')
     ax1.legend()
     
 
     # Histogram without KDE
-    fig2,ax2 = plt.subplots(figsize=(12,5))
+    fig2,ax2 = plt.subplots(figsize=(12,5.25))
     bins_ = [i for i in range(0,10000,150)]
     sns.distplot(df_275['Price'],color='#C95948',bins=bins_,kde=False,ax=ax2,label='27.5')
     sns.distplot(df_29['Price'],color='#4586AC',bins=bins_,kde=False,ax=ax2,label='29')
     ax2.set_xticks(np.linspace(0,10000,25))
     ax2.set_title('Histogram of 27.5" and 29" Wheel Bikes')
     ax2.set_ylabel('Count')
-    ax2.set_xlabel('Price')
+    ax2.set_xlabel('Price($)')
     ax2.legend()
     plt.xticks(rotation=35)
 
 
-    # Box plot of materials Given Wheel Size
-    fig3,ax3 = plt.subplots(figsize=(12,5))
+    # Box plot of price Given Wheel Size and suspension travel
+    fig3,ax3 = plt.subplots(figsize=(12,5.5))
     sns.boxplot(x='Front_travel',y='Price',data = box_plot_df(df),hue="Wheel_Size",ax=ax3)
-    ax3.set_xlabel('Front Travel')
+    ax3.set_xlabel('Front Travel(mm)')
     ax3.set_title('Distributions of Price With Varying Suspension Travel')
 
     # Box Plot of materials

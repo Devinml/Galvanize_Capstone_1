@@ -40,13 +40,13 @@ And here are the first 10 postings of my listing. All prices were converted into
 </p>
 
 ## EDA 
-There were 2230 29" wheel bikes
-There were 1689 27.5" wheel bikes. 
+There were 2230 27.5" wheel bikes
+There were 1689 29" wheel bikes. 
 
 I started by making a histogram for each wheel size. Based off the histogram it looks like there may be some diference in the average value as the 29" wheel bikes appear to have a larger right tail but it is far from conclusive.
 
 <p align="center">
-  <img src="Images/hist_no_kde.png" >
+  <img src="Images/hist_kde.png" >
 </p>
 
 I applied the central limit theorem to the distributions above and calculated the standard deviation to get the components of the normal distribution. After plotting, the difference in these plots of means is clearly apparent. To further concrete my observations I applied the Welche's T-test to calculate a t statistic and a p-value. I calculated a t-statistic of 13.12 and a p-value of 2.38e-38, therefore I can reject my null hypothesis and accept my alternative hypothesis and conclusively say that the mean price of 29" wheeled mountain bikes is greater than the mean price of 27.5" wheeled mountain bikes. 
