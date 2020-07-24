@@ -28,8 +28,7 @@ I web scraped PinkBike's classified section to get a data set. I extracted the f
     <li>Rear Suspension Travel
     <li>Asking Price
 
-If the user didn't include all of the parameters teh data was not considered in the analysis. The total size of the dataset 
-3,919 cleaned posts. 
+If the user didn't include all of the parameters teh data was not considered in the analysis. The total size of the dataset was 3,919 cleaned posts. 
 
 <p align="center">
   <img src="Images/cleaned_data.png" >
@@ -49,16 +48,24 @@ I started by making a histogram for each wheel size. Based off the histogram it 
   <img src="Images/hist_kde.png" >
 </p>
 
-I applied the central limit theorem to the distributions above and calculated the standard deviation to get the components of the normal distribution. After plotting, the difference in these plots of means is clearly apparent. To further concrete my observations I applied the Welche's T-test to calculate a t statistic and a p-value. I calculated a t-statistic of 13.12 and a p-value of 2.38e-38, therefore I can reject my null hypothesis and accept my alternative hypothesis and conclusively say that the mean price of 29" wheeled mountain bikes is greater than the mean price of 27.5" wheeled mountain bikes. 
+I applied the central limit theorem to the distributions above and calculated the standard deviation to get the components of the normal distribution. After plotting, the difference in these plots of means is clearly apparent. To further concrete my observations I applied the Welche's T-test to calculate a t-statistic and a p-value. I calculated a t-statistic of 13.12 and a p-value of 2.38e-38, therefore I can reject my null hypothesis and accept my alternative hypothesis and conclusively say that the mean price of 29" wheeled mountain bikes is greater than the mean price of 27.5" wheeled mountain bikes. 
 
 <p align="center">
   <img src="Images/Dist_of_means.png" >
 </p>
 
+The primary use of a bike is generally determined by the amount of suspension travel it has. This can be conceptualized by trying to ride a road bike down the stairs. It wouldn't be enjoyable but, and you wouldn't want to pedal a heavy bike with big tires 100 miles. By grouping by the amount of suspension travel 2 things become immediately obvious:
+1. The more travel a bike has the greater the central tendency of the means of that group of bikes is higher.
+2. Mountain bikes with 29" wheels had a higher central tendency across all travel lengths.
 <p align="center">
   <img src="Images/box_plot.png" >
 </p>
 
+An interesting further investigation is that titanium bikes had a higher central tendency than carbon fiber bikes even though only a few manufacturers are making titanium bikes. 
+
 <p align="center">
   <img src="Images/boxplot_material.png" width=600 height=750  >
 </p>
+
+## Conclusion
+If you are in the used market for a high-end mountain bike you should expect to pay more for a 29er. A glass half full approach to that is: if you are in the market for a used mountain bike and you can live without the breakneck speeds of a 29er you could save yourself some money and still have a decent bike with a 27.5. 
