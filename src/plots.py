@@ -60,7 +60,7 @@ if __name__=='__main__':
     ax.set_ylim([-.0005,.018])
     ax.axvline(mean_29,ymax=norm_29.pdf(mean_29)/(.01775),color = '#4586AC',ls = '--',alpha=.5)
     ax.axvline(mean_275,ymax=norm_275.pdf(mean_275)/(.018),color = '#C95948',ls = '--',alpha=.5)
-    plt.text(3225,0.0143594,s=f'T_stat = {t_test[0]:.2f}, p value = {t_test[1]:.2f}')
+    plt.text(3190,0.0143594,s=f't-stat = {t_test[0]:.2f}, p-value = 2.38e-38')
     ax.set_xticks([2600,
                     round(mean_275-2*std_275,5),
                     round(mean_275,5),
