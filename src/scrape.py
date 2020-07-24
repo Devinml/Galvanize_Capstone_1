@@ -61,9 +61,9 @@ class WebCleaner(object):
                     'these', 'are', 'placeholers']
         return [condition, size, wheel_size,
                 material, front_travel, rear_travel]
-    # This function will clean the price data of the website
 
     def clean_price(self):
+        # This function will clean the price data of the website
         exclude = set(string.punctuation)
         s = ''.join(ch for ch in self.text if ch not in exclude)
         out = s.split(' ')
