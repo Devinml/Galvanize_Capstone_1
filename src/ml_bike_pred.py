@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 from math import sqrt
 import matplotlib.pyplot as plt 
@@ -7,6 +8,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+PRICE_MAX = 4000
 
 def check_road(size):
     unwanted = ['45cm', '52cm', '54cm', '55cm', '56cm', '57cm']
@@ -32,14 +35,14 @@ def read_data():
     df = df.drop('Currency', axis=1)
     df = df.drop('Size', axis=1)
     df = pd.concat([df,dummies, size, matierial, currency], axis=1)
-    df = df[df['Price'] <= 6000]
+    df = df[df['Price'] <= PRICE_MAX]
     df = df[df['Price'] >= 1000]
     return df
 
 def nlp(df=None):
     if  df is None:
         df = pd.read_csv('data/cleaned_data.csv')
-    tf_idf = TfidfVectorizer()
+    tf_idf = TfidfVectorizer(stop_words='english')
     x= tf_idf.fit_transform(raw_documents=df['Title'])
     
     df = pd.DataFrame(x.toarray())
@@ -54,6 +57,7 @@ def predict():
     df = df.drop('Title', axis=1)
     df = pd.concat([df, nlp_df])
     df = df.fillna(value=0)
+    df = df[df['Price'] >= 1000]
     X = df.drop('Price', axis=1)
     y = df['Price']
 
@@ -62,15 +66,20 @@ def predict():
     rf.fit(X=X_train, y=y_train)
     preds = rf.predict(X_test)
     print(sqrt(mean_squared_error(y_true=y_test, y_pred=preds)))
-    lin_reg = LinearRegression()
-    lin_reg.fit(X=X_train, y=y_train)
-    lin_reg_preds = lin_reg.predict(X_test)
     
-    # make_plot(y_test=y_test, preds=preds)
+    
+    make_plot(y_test=y_test, preds=preds)
 
 def make_plot(y_test, preds):
+    x = np.linspace(start=0, stop=PRICE_MAX, num=100)
+    y = x
+    y_pos = x + 500
+    y_neg = x - 500
     fig, ax = plt.subplots()
     ax.scatter(y_test, preds)
+    ax.plot(x,y, ls= '--')
+    ax.plot(x,y_pos, ls= '--')
+    ax.plot(x, y_neg, ls='--')
     ax.set_xlabel('Test Values')
     ax.set_ylabel('Preds')
     plt.show()
