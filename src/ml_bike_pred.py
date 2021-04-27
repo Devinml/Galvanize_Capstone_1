@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from math import sqrt
 import matplotlib.pyplot as plt 
+from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -66,22 +67,28 @@ def predict():
     rf.fit(X=X_train, y=y_train)
     preds = rf.predict(X_test)
     print(sqrt(mean_squared_error(y_true=y_test, y_pred=preds)))
+    print(r2_score(preds,y_test))
     
     
     make_plot(y_test=y_test, preds=preds)
 
 def make_plot(y_test, preds):
+    plt.style.use('ggplot')
+    plt.rcParams.update({'font.size': 14})
     x = np.linspace(start=0, stop=PRICE_MAX, num=100)
     y = x
     y_pos = x + 500
     y_neg = x - 500
-    fig, ax = plt.subplots()
-    ax.scatter(y_test, preds)
-    ax.plot(x,y, ls= '--')
-    ax.plot(x,y_pos, ls= '--')
-    ax.plot(x, y_neg, ls='--')
-    ax.set_xlabel('Test Values')
-    ax.set_ylabel('Preds')
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.scatter(y_test, preds, alpha=.5)
+    # ax.plot(x,y, ls= '--')
+    # ax.plot(x,y_pos, ls= '--')
+    # ax.plot(x, y_neg, ls='--')
+    ax.set_ylim(bottom=0, top=PRICE_MAX+500)
+    ax.set_xlim(left=0, right=PRICE_MAX+500)
+    ax.set_xlabel('True Price ($)')
+    ax.set_ylabel('Predicted Price ($)')
+    ax.set_title("Predicted Price vs. Actual")
     plt.show()
 
 
